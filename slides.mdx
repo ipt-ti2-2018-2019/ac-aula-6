@@ -1,0 +1,500 @@
+import { Notes } from "mdx-deck";
+
+export { swiss as theme } from "mdx-deck/themes";
+
+# Aula 6
+
+## JSX e AJAX
+
+---
+
+## JSX
+
+JSX é uma sintaxe especial para escrever elementos React.
+
+Tem como objetivo tornar o código mais legível, e mais familiar ("parece HTML").
+
+---
+
+## JSX - Comparação
+
+O seguinte JavaScript:
+
+```js
+function Exemplo(props) {
+  return React.createElement("p", { style: { color: "blue" } }, "Sem JSX");
+}
+```
+
+Escreve-assim com JSX:
+
+```js
+function Exemplo(props) {
+  return <p style={{ color: "blue" }}>Com JSX</p>;
+}
+```
+
+---
+
+## JSX - Desvantagens
+
+- **JSX não é uma linguagem que é percebida pelos browsers**, logo são necessárias ferramentas de compilação
+- **As mesmas limitações do JavaScript aplicam-se no JSX** (ex: palavras reservadas como `class` (tem que se usar `className`))
+- **Se se usar um componente (como uma classe) que tem letra minúscula, vai dar asneira!!**
+
+---
+
+## JSX - Atenção a maiúsculas e minúsculas! (I)
+
+O seguinte código não faz o pretendido:
+
+```js
+function asneira(props) {
+  return <p>Não me vês.</p>;
+}
+
+ReactDOM.render(<asneira />, document.getElementById("root"));
+```
+
+---
+
+## JSX - Atenção a maiúsculas e minúsculas! (II)
+
+Isto porque o código do slide anterior é compilado em:
+
+```js
+function asneira(props) {
+  return React.createElement("p", null, "Não me vês.");
+}
+
+ReactDOM.render(React.createElement("asneira"), document.getElementById("root"));
+```
+
+---
+
+## JSX - Atenção a maiúsculas e minúsculas! (III)
+
+Regra geral (ou, porque é que dá erro):
+
+- Se o nome do componente começa com letra minúscula no JSX ("o nome da tag"), então é colocado "o nome da tag" entre aspas.
+- Se o nome do componente começar com letra maiúscula no JSX ("o nome da tag"), então não são colocadas aspas (e é usada a função/classe)
+
+---
+
+## JSX - Mais informações
+
+- [Babel.js REPL for JSX](https://babeljs.io/repl#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=EoUwhgxgLgIg8gWQHQCcQDsAmIUAoA8AFgIwB8hIANpQPb4D0JpANAASY0QCuAthlEgDmIKAFFKIPuigAhAJ4BJTLgDkYAA7qVASm1A&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=es2015%2Creact%2Cstage-2&prettier=false&targets=&version=7.4.2)
+- https://reactjs.org/docs/introducing-jsx.html
+- https://reactjs.org/docs/jsx-in-depth.html
+
+---
+
+## Create React App
+
+---
+
+O Create React App é uma ferramenta estilo `File > New > Project` para aplicações React.
+
+Traz, "out of the box", o seguinte:
+
+- Suporte para JSX
+- Reload automático
+- Servidor HTTP para desenvolvimento
+- Suporte para gerar uma versão optimizada do código
+
+---
+
+## Create React App - Instalação e uso
+
+Para criar e usar um projeto Create React App, é preciso o Node.js (https://nodejs.org/en/)
+
+Depois de instalado (nota: em Windows, poderá ser necessário um reboot), numa **linha de comandos**:
+
+```
+cd <pasta pretendida>
+npx create-react-app <nome-do-projeto>
+```
+
+---
+
+## Create React App - Exemplo (I)
+
+(O exemplo abaixo é Windows)
+
+```
+# Ir para a pasta pretendida
+cd c:\\users\\afecarvalho\\documents
+
+# Criar a aplicação (ficará em <pasta atual>\\exemplo)
+npx create-react-app exemplo
+
+# O comando acima demora algum tempo...
+```
+
+---
+
+## Create React App - Exemplo (II)
+
+Depois do comando anterior acabar, vão aparecer algumas instruções em inglês:
+
+```
+Success! Created exemplo at c:\\users\\afecarvalho\\documents\\exemplo
+Inside that directory, you can run several commands:
+
+  npm start
+    Starts the development server.
+
+  npm run build
+    Bundles the app into static files for production.
+
+We suggest that you begin by typing:
+
+  cd exemplo
+  npm start
+
+Happy hacking!
+```
+
+---
+
+## Create React App - Notas
+
+Podem encontrar mais informação aqui:
+
+- https://github.com/facebook/create-react-app
+- https://facebook.github.io/create-react-app/
+
+Nota: **Evitem colocar estes projetos no OneDrive/Google Drive/Dropbox/etc.**! Poderão causar problemas de sincronização, e são relativamente grandes.
+
+Devem usar um repositório Git. Alternativamente, excluam a pasta `node_modules` da sincronização. (Ver anexo 2)
+
+---
+
+## Exercício
+
+Converter o código do projeto da aplicação de tarefas para usar Create React App e JSX.
+
+Um exemplo está aqui: https://github.com/ipt-ti2-2018-2019/todo-app
+
+(Não é para entregar no e-Learning)
+
+---
+
+## AJAX
+
+### Asynchonous JavaScript and XML
+
+---
+
+## AJAX - Introdução
+
+AJAX é um conjunto de funções, classes, e objetos, com o objetivo de permitir aceder de forma programática a dados em JavaScript.
+
+É comum hoje em dia ter-se aplicações web (e não só, ex: aplicações móveis) que acedem a dados que não estão disponíveis localmente.
+
+Para isso, usam AJAX para obter ou enviar dados.
+
+---
+
+## AJAX - Funcionamento
+
+AJAX funciona sobre arquitecturas cliente-servidor, usando o protocolo HTTP para fazer a comunicação entre o cliente e o servidor.
+
+É, portanto, baseado no modelo request-response (pedido-resposta). AJAX é usado para enviar os pedidos (HTTP Request) para o servidor, e depois interpretar os dados da resposta (HTTP Response), sejam eles texto, JSON, XML, binário, ...
+
+---
+
+<img
+  src="https://cscie12.dce.harvard.edu/lecture_notes/2007-08/20080319/images/ajax_schematic.png"
+  alt="Esquema de AJAX"
+  style={{ margin: "0 auto", display: "block", width: 960 }}
+/>
+
+Fonte: https://cscie12.dce.harvard.edu/lecture_notes/2007-08/20080319/slide31.html
+
+---
+
+## AJAX - Uso
+
+Existem duas ferramentas nativas para trabalhar com AJAX em programação web:
+
+- A classe `XMLHttpRequest`
+- A função `fetch`
+
+---
+
+## AJAX - `XMLHttpRequest`
+
+`XMLHttpRequest` foi a primeira API disponibilizada para efetuar HTTP Requests em JavaScript.
+
+É uma classe que pode ser configuada para fazer um HTTP Request, e adicionar _event listeners_ para erros, resposta, progresso, etc.
+
+Apesar do nome, esta classe não se restringe apenas a XML, podendo também ser usada para receber e enviar JSON, texto, e até ficheiros.
+
+(Ver exemplos)
+
+---
+
+## AJAX - `fetch`
+
+Como a classe `XMLHttpRequest` é algo imprática, foi criada mais recentemente a função global, `fetch`.
+
+Esta função é 100% assíncrona, devolvendo objetos da classe `Promise` em cada operação, e deve ser usada sempre que possível (em detrimento do XMLHttpRequest)
+
+(Ver exemplos)
+
+---
+
+## `Promise`
+
+### Operações assíncronas
+
+---
+
+## `Promise` - Introdução (e um pouco de Sistemas Distribuídos) (I)
+
+`Promise` é uma classe em JavaScript que representa uma operação assíncrona.
+
+JavaScript é especial no seu assíncronismo: Ao contrário de uma linguagem como o Java, que tem várias _threads_ para executar várias instruções em simultâneo, JavaScript é _single-threaded_.
+
+---
+
+## `Promise` - Introdução (II)
+
+Uma `Promise` tem 3 estados:
+
+- **Pending** - Ainda não está disponível o resultado.
+- **Resolved** - Operação terminada com **sucesso**, e os dados estão disponíveis. Para saber os dados, tem que se usar o `.then`.
+- **Rejected** - Operação terminada com **erro**. Para se saber o erro, tem que se usar o `.catch`.
+
+**Nota**: Não há outra forma de saber o valor/erro excepto se usarem o `.then` ou `.catch`!
+
+---
+
+## `Promise` - definição
+
+```js
+class Promise {
+    // Recebe uma função por parâmetro que tem dois callbacks (funções),
+    // um para sucesso (resolve), e outro com o erro (reject).
+    // Devem ser invocados após a operação terminar com sucesso (ou erro).
+    constructor(tarefa: (resolve(dados): void, reject(erro): void) => void);
+
+    // Adiciona um callback (função) quando esta Promise termina
+    // com sucesso
+    then(proxTarefa: (dados): any): Promise;
+
+    // Serve como o "catch" se algum problema acontecer.
+    // Pode ser usado para recuperar, ou lançar outro erro.
+    catch(trataErro: (erro): any): Promise;
+}
+```
+
+---
+
+## `Promise` - definição
+
+```js
+class Promise {
+    // Cria uma Promise já pronta (com dados), serve como wrapper
+    static resolve(dados): Promise;
+
+    // Cria uma Promise rejeitada (com erro),serve como wrapper para erros
+    static reject(erro): Promise;
+
+    // Cria uma promise que espera por todas. No `then`, os dados serão um array (pela ordem de input)
+    // Se qualquer falhar, então é chamado o `catch` com o primeiro erro.
+    static all(...promises: Promise[]): Promise;
+
+    // Cria uma promise que espera pela primeira que terminar ou der erro.
+    static race(...promises: Promise[]): Promise;
+}
+```
+
+---
+
+## `Promise` - tratamento de erros
+
+Ao contrário do código normal, em que erros terminam a aplicação (a não ser que exista try/catch), se ocorrer um erro não tratado numa Promise (através do `.catch`), então o erro é **ENGOLIDO** (no máximo, aparece uma mensagem de aviso na linha de comandos).
+
+O Node.js irá eventualmente fazer com que **qualquer Promise rejeitada termine o processo**!
+
+Solução: meter sempre um `.catch` quando se usa uma Promise (da mesma forma que se deve usar o try/catch).
+
+---
+
+## Event Loop (I)
+
+O facto de JavaScript ser _single-threaded_ implica que só pode ser executada uma coisa de cada vez.
+
+Como só pode ser executada uma coisa de cada vez, operações como esperar pela resposta de um HTTP Request, ou ler um ficheiro têm o risco de bloquear completamente a aplicação enquanto decorrem estas operações.
+
+---
+
+## Event Loop (II)
+
+E, como bloquear completamente a aplicação é mau para o desempenho (experimentem fazer um `for` de 1 milhão de iterações e tentar clicar num botão enquanto o ciclo corre), JavaScript aplica o conceito do _Event Loop_.
+
+O _Event Loop_ é uma fila para onde vão funções que são executadas assíncronamente (ex: `setTimeout`, `setInterval`, eventos, `Promise`, `XMLHttpRequest`, `setImmediate`, `requestAnimationFrame`, etc.).
+
+---
+
+## Event Loop (III)
+
+O _Event Loop_ funciona da seguinte forma:
+
+1. Cada nova função é adicionada ao fim da fila.
+2. Cada vez que não existir uma função a ser executada, é verificada a fila.
+3. Se existir uma função, ela é executada na thread principal.
+4. Assim que a função terminar, voltar ao passo 2.
+
+(Se forem a ver, é como os algoritmos de _Time Slicing_ de SO)
+
+---
+
+## Event Loop - Exercício
+
+Dado o código abaixo, qual é a ordem dos prints?
+
+```JavaScript
+function exemplo() {
+    console.log("Olá");
+    setTimeout(() => console.log("Mundo"), 0);
+    console.log("Cruel");
+}
+
+exemplo();
+```
+
+---
+
+## Event Loop - Exercício
+
+Resposta:
+
+1. Olá
+2. Cruel
+3. Mundo
+
+Razão: Mesmo com o timeout de 0 no `setTimeout`, a função que faz o print é colocada na fila, e só é executada depois da função `exemplo` terminar.
+
+---
+
+## Event Loop - Mais informação
+
+Recomendo o seguinte vídeo: https://www.youtube.com/watch?v=8aGhZQkoFbQ
+
+Ferramenta usada no vídeo acima: [http://latentflip.com/loupe](http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
+
+---
+
+## Assincronismo em JavaScript - passado (callbacks)
+
+Antigamente, o código assíncrono em JavaScript era escrito da seguinte forma: muitos callbacks, uns a seguir aos outros, criando código difícil de ler:
+
+```js
+function getArtistaComFaixas(idArtista, cb) {
+  db.queryOne("SELECT * FROM tbl_artistas WHERE id = ?", [idArtista], (err, artista) => {
+    if (err) {
+      cb(err);
+    } else {
+      db.query("SELECT * FROM tbl_faixas WHERE artista_id = ?", [idArtista], (err, faixas) => {
+        if (err) {
+          cb(err);
+        } else {
+          // Finalmente tenho o artista e as faixas (phew)
+          cb(null, { artista: artista, faixas: faixas });
+        }
+      });
+    }
+  });
+}
+```
+
+(O exemplo acima é inspirado por algum código de Node.js para MySQL)
+
+---
+
+## Assincronismo em JavaScript - passado (callbacks)
+
+```js
+app.get("/artistas/:id", (req, res) => {
+  getArtistaComFaixas(req.params.id, (err, artista) => {
+    if (err) {
+      res.status(500).json({ erro: "Ocorreu um erro" });
+    } else {
+      res.status(200).json(artista);
+    }
+  });
+});
+```
+
+(O exemplo acima é inspirado por algum código de Node.js para MySQL)
+
+---
+
+## Assincronismo em JavaScript - presente (Promises)
+
+Atualmente, temos Promises que ajudam a simplificar (um pouco) o código:
+
+```js
+function getArtistaComFaixas(id) {
+  return db.queryOne("SELECT * FROM tbl_artistas WHERE id = ?", [id]).then(artista => {
+    return db.query("SELECT * FROM tbl_faixas WHERE artista_id = ?", [id]).then(faixas => {
+      return { artista: artista, faixas: faixas };
+    });
+  });
+}
+```
+
+---
+
+## Assincronismo em JavaScript - presente (Promises)
+
+```js
+app.get("/artistas/:id", (req, res) => {
+  getArtistaComFaixas(req.params.id)
+    .then(artista => {
+      res.status(200).json(artista);
+    })
+    .catch(erro => {
+      res.status(500).json({ erro: "Ocorreu um erro" });
+    });
+});
+```
+
+---
+
+## Assincronismo com JavaScript - futuro atual (async/await)
+
+A funcionalidade `async` / `await` do JavaScript assenta em Promises, e permite escrever código assíncrono que parece síncrono, com `async function`:
+
+```js
+async function getArtistaComFaixas(id) {
+  let artista = await db.queryOne("SELECT * FROM tbl_artistas WHERE id = ?", [id]);
+
+  let faixas = await db.query("SELECT * FROM tbl_faixas WHERE artista_id = ?", [id]);
+
+  return {
+    artista: artista,
+    faixas: faixas
+  };
+}
+```
+
+---
+
+## Assincronismo com JavaScript - futuro atual (async/await)
+
+```js
+app.get("/artistas/:id", async (req, res) => {
+  try {
+    let artista = getArtistaComFaixas(req.params.id);
+    res.status(200).json(artista);
+  } catch (erro) {
+    res.status(500).json({ erro: "Ocorreu um erro" });
+  }
+});
+```
+
+---

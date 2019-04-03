@@ -122,7 +122,7 @@ Independentemente de onde é usado, é costume ligar AJAX com o protocolo HTTP (
 
 Existem duas APIs oficiais para se trabalhar com AJAX na web:
 
--   Com o objeto `XMLHttpRequest`
+-   Com a classe `XMLHttpRequest`
 -   Com a função `fetch`
 
 Também existem bibliotecas de terceiros para trabalhar com AJAX, por exemplo:
@@ -248,7 +248,7 @@ function mostraTarefas(tarefas) {
 
 #### Notas
 
--   **Cada objeto só pode ser usado uma vez**, depois de ser usado para enviar um pedido HTTP, deve ser criado outro para fazer um novo pedido.
+-   **Cada objeto `XMLHttpRequest` só pode ser usado uma vez**, depois de ser usado para enviar um pedido HTTP, deve ser criado outro para fazer um novo pedido.
 
 #### Mais informação
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>AJAX</title>
+
+        <style>
+            .exemplos {
+                display: flex;
+            }
+            .exemplo {
+                border: 2px solid #aaa;
+                padding: 5px;
+                flex: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1>Exemplos AJAX com Fetch e XMLHttpRequest</h1>
+
+            <p>
+                O código destes exemplos permite mostrar como enviar um HTTP
+                Request e ler os dados da resposta, com Fetch e com
+                XMLHttpRequest.
+            </p>
+        </div>
+        <div class="exemplos">
+            <section class="exemplo">
+                <h2>Exemplo - Fetch</h2>
+
+                <ul id="tarefasFetch">
+                    <li>
+                        Clica no botão abaixo para lançar um HTTP Request com o
+                        Fetch.
+                    </li>
+                </ul>
+
+                <button id="btnFetch" type="button">Clicar</button>
+            </section>
+            <section class="exemplo">
+                <h2>Exemplo - XMLHttpRequest</h2>
+
+                <ul id="tarefasXHR">
+                    <li>
+                        Clica no botão abaixo para lançar um HTTP Request com o
+                        XMLHttpRequest.
+                    </li>
+                </ul>
+
+                <button id="btnXHR" type="button">Clicar</button>
+            </section>
+        </div>
+
+        <script src="ajax-fetch.js"></script>
+        <script src="ajax-xmlhttprequest.js"></script>
+    </body>
+</html>
