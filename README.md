@@ -8,7 +8,7 @@ Ou seja, o seguinte código:
 
 ```javascript
 function Exemplo(props) {
-    return <p style={{ color: props.cor }}>Olá, {props.nome}!</p>;
+  return <p style={{ color: props.cor }}>Olá, {props.nome}!</p>;
 }
 ```
 
@@ -16,30 +16,24 @@ function Exemplo(props) {
 
 ```javascript
 function Exemplo(props) {
-    return React.createElement(
-        "p",
-        { color: props.cor },
-        "Olá, ",
-        props.nome,
-        "!"
-    );
+  return React.createElement("p", { color: props.cor }, "Olá, ", props.nome, "!");
 }
 ```
 
 ### Documentação oficial
 
--   https://reactjs.org/docs/glossary.html#jsx
--   https://reactjs.org/docs/introducing-jsx.html
--   https://reactjs.org/docs/jsx-in-depth.html
+- https://reactjs.org/docs/glossary.html#jsx
+- https://reactjs.org/docs/introducing-jsx.html
+- https://reactjs.org/docs/jsx-in-depth.html
 
 ### Detalhes da sintaxe
 
--   Para se usar variáveis ou expressões (ex: cálculos aritméticos) dentro do HTML ou dentro de atributos, usam-se chavetas (`{}`)
-    -   Atenção que se se quiser usar um objeto diretamente (ex: no `style`), usam-se duas chavetas, uma para o objeto, e outra para a expressão
--   Se se quiser usar texto num atributo, usam-se aspas, tal como no HTML
-    -   Tudo o resto é tratado as-is (com limitações no HTML, ex: o `value` é sempre uma string, mas posso passar uma variável que seja string, com as chavetas)
--   As mesmas limitações do JavaScript mantêm-se (ex: `className`, `htmlFor`)
--   Dois elementos JSX adjacentes têm que ter um elemento "wrapper", ex:
+- Para se usar variáveis ou expressões (ex: cálculos aritméticos) dentro do HTML ou dentro de atributos, usam-se chavetas (`{}`)
+  - Atenção que se se quiser usar um objeto diretamente (ex: no `style`), usam-se duas chavetas, uma para o objeto, e outra para a expressão
+- Se se quiser usar texto num atributo, usam-se aspas, tal como no HTML
+  - Tudo o resto é tratado as-is (com limitações no HTML, ex: o `value` é sempre uma string, mas posso passar uma variável que seja string, com as chavetas)
+- As mesmas limitações do JavaScript mantêm-se (ex: `className`, `htmlFor`)
+- Dois elementos JSX adjacentes têm que ter um elemento "wrapper", ex:
 
 ```javascript
 // Inválido
@@ -54,26 +48,26 @@ function Errado(props) {
 ```javascript
 // Correto
 function Certo(props) {
-    return (
-        <div>
-            <p>Elemento 1</p>
-            <p>Elemento 2</p>
-        </div>
-    );
+  return (
+    <div>
+      <p>Elemento 1</p>
+      <p>Elemento 2</p>
+    </div>
+  );
 }
 ```
 
 ### Vantagens
 
--   O código fica mais fácil de ler
--   Familiaridade (parece HTML)
+- O código fica mais fácil de ler
+- Familiaridade (parece HTML)
 
 ### Desvantagens / avisos
 
--   Browsers não percebem esta sintaxe, logo é necessário um compilador
--   **Se os nomes das classes/funções não começarem com letra maiúscula, o compilador vai fazer asneira e vai emitir uma tag HTML, resultando em bugs potencialmente subtis.** (https://reactjs.org/docs/jsx-in-depth.html#user-defined-components-must-be-capitalized)
--   Alguns atributos no HTML continuam a ser diferentes no JSX (ex: `tabindex` vs. `tabIndex`, `onclick` vs. `onClick`).
--   O `React` tem que estar importado no topo do ficheiro (`import React from 'react'`)
+- Browsers não percebem esta sintaxe, logo é necessário um compilador
+- **Se os nomes das classes/funções não começarem com letra maiúscula, o compilador vai fazer asneira e vai emitir uma tag HTML, resultando em bugs potencialmente subtis.** (https://reactjs.org/docs/jsx-in-depth.html#user-defined-components-must-be-capitalized)
+- Alguns atributos no HTML continuam a ser diferentes no JSX (ex: `tabindex` vs. `tabIndex`, `onclick` vs. `onClick`).
+- O `React` tem que estar importado no topo do ficheiro (`import React from 'react'`)
 
 ### Playground
 
@@ -93,8 +87,8 @@ O **Create React App** é o equivalente do `File > New > Project...` do Visual S
 
 Para usar esta ferramenta, é preciso:
 
--   Node.js, disponível em https://nodejs.org/
--   Linha de comandos
+- Node.js, disponível em https://nodejs.org/
+- Linha de comandos
 
 **Nota: Poderá ser preciso reiniciar o PC para que as ferramentas `node`, `npm`, e `npx` fiquem disponíveis na linha de comandos.** Isto só se aplica ao Windows. Em macOS e Linux, não é preciso reiniciar o PC.
 
@@ -122,13 +116,13 @@ Independentemente de onde é usado, é costume ligar AJAX com o protocolo HTTP (
 
 Existem duas APIs oficiais para se trabalhar com AJAX na web:
 
--   Com a classe `XMLHttpRequest`
--   Com a função `fetch`
+- Com a classe `XMLHttpRequest`
+- Com a função `fetch`
 
 Também existem bibliotecas de terceiros para trabalhar com AJAX, por exemplo:
 
--   `$.ajax` (jQuery AJAX)
--   `axios`
+- `$.ajax` (jQuery AJAX)
+- `axios`
 
 ### `XMLHttpRequest`
 
@@ -148,20 +142,20 @@ xhr.open("GET", "https://ipt-ti2-todo.azurewebsites.net/");
 
 // Adicionar os event listeners para quando o pedido termina com sucesso (`onload`) ou erro (`onerror`)
 xhr.onload = () => {
-    // Este código vai ser executado quando a resposta chegar. Nota que a resposta pode significar erro
-    // logo deve-se usar o `status` do objeto para verificar se os dados chegaram com sucesso ou não.
-    if (xhr.status === 200) {
-        // 200 == OK (outros: 404 == Not Found, 500 == Internal Server Error, etc.)
-        // Existem várias formas de obter os dados da resposta:
-        // - xhr.responseText == Texto da resposta
-        // - xhr.responseXML == Documento XML (como objeto do tipo Document), já interpretado como XML
-    } else {
-        // Potencialmente, erro.
-    }
+  // Este código vai ser executado quando a resposta chegar. Nota que a resposta pode significar erro
+  // logo deve-se usar o `status` do objeto para verificar se os dados chegaram com sucesso ou não.
+  if (xhr.status === 200) {
+    // 200 == OK (outros: 404 == Not Found, 500 == Internal Server Error, etc.)
+    // Existem várias formas de obter os dados da resposta:
+    // - xhr.responseText == Texto da resposta
+    // - xhr.responseXML == Documento XML (como objeto do tipo Document), já interpretado como XML
+  } else {
+    // Potencialmente, erro.
+  }
 };
 
 xhr.onerror = () => {
-    // Este código vai ser executado se ocorrer um erro, geralmente de rede (offline, timeout, etc.)
+  // Este código vai ser executado se ocorrer um erro, geralmente de rede (offline, timeout, etc.)
 };
 
 // Enviar o pedido
@@ -177,27 +171,27 @@ let xhr = new XMLHttpRequest();
 xhr.open("GET", "https://ipt-ti2-todo.azurewebsites.net/");
 
 xhr.onload = () => {
-    // Este código vai ser executado quando a resposta chegar. Nota que a resposta pode significar erro
-    // logo deve-se usar o `status` do objeto para verificar se os dados chegaram com sucesso ou não
-    if (xhr.status === 200) {
-        // 200 == OK (outros: 404 == Not Found, 500 == Internal Server Error, etc.)
-        // Existem várias formas de obter os dados da resposta:
-        // - xhr.responseText == Texto da resposta
-        // - xhr.responseXML == Documento XML (como objeto do tipo Document), já interpretado como XML
-        let htmlResposta = xhr.responseText;
+  // Este código vai ser executado quando a resposta chegar. Nota que a resposta pode significar erro
+  // logo deve-se usar o `status` do objeto para verificar se os dados chegaram com sucesso ou não
+  if (xhr.status === 200) {
+    // 200 == OK (outros: 404 == Not Found, 500 == Internal Server Error, etc.)
+    // Existem várias formas de obter os dados da resposta:
+    // - xhr.responseText == Texto da resposta
+    // - xhr.responseXML == Documento XML (como objeto do tipo Document), já interpretado como XML
+    let htmlResposta = xhr.responseText;
 
-        document.body.innerHTML = htmlResposta;
-    } else {
-        // Meramente exemplificativo, deve-se evitar o alert()...
-        alert("Erro no servidor");
-    }
+    document.body.innerHTML = htmlResposta;
+  } else {
+    // Meramente exemplificativo, deve-se evitar o alert()...
+    alert("Erro no servidor");
+  }
 };
 
 xhr.onerror = () => {
-    // Este código vai ser executado se ocorrer um erro, geralmente de rede (offline, timeout, etc.)
+  // Este código vai ser executado se ocorrer um erro, geralmente de rede (offline, timeout, etc.)
 
-    // Meramente exemplificativo, deve-se evitar o alert()...
-    alert("Erro de rede");
+  // Meramente exemplificativo, deve-se evitar o alert()...
+  alert("Erro de rede");
 };
 
 xhr.send();
@@ -211,46 +205,93 @@ let xhr = new XMLHttpRequest();
 xhr.open("GET", "https://ipt-ti2-todo.azurewebsites.net/api/todos/afecarvalho");
 
 xhr.onload = () => {
-    if (xhr.status === 200) {
-        // JSON é texto, logo usa-se a função `JSON.parse` para transformar o texto em objetos.
-        let jsonResposta = xhr.responseText;
+  if (xhr.status === 200) {
+    // JSON é texto, logo usa-se a função `JSON.parse` para transformar o texto em objetos.
+    let jsonResposta = xhr.responseText;
 
-        let listaTarefas = JSON.parse(jsonResposta);
+    let listaTarefas = JSON.parse(jsonResposta);
 
-        // Usar o objeto (uso uma função para organizar o código...)
-        mostraTarefas(listaTarefas);
-    } else {
-        alert("Não foi possível obter o JSON...");
-    }
+    // Usar o objeto (uso uma função para organizar o código...)
+    mostraTarefas(listaTarefas);
+  } else {
+    alert("Não foi possível obter o JSON...");
+  }
 };
 
 xhr.onerror = () => {
-    alert("Erro de rede");
+  alert("Erro de rede");
 };
 
 xhr.send();
 
 function mostraTarefas(tarefas) {
-    let container = document.createElement("ul");
+  let container = document.createElement("ul");
 
-    for (let tarefa of tarefas) {
-        let liTarefa = document.createElement("li");
+  for (let tarefa of tarefas) {
+    let liTarefa = document.createElement("li");
 
-        // https://github.com/ipt-ti2-2018-2019/TodoApiAjax#modelo-de-dados
-        liTarefa.textContent = tarefa.description;
+    // https://github.com/ipt-ti2-2018-2019/TodoApiAjax#modelo-de-dados
+    liTarefa.textContent = tarefa.description;
 
-        container.appendChild(liTarefa);
-    }
+    container.appendChild(liTarefa);
+  }
 
-    document.body.appendChild(container);
+  document.body.appendChild(container);
 }
 ```
 
 #### Notas
 
--   **Cada objeto `XMLHttpRequest` só pode ser usado uma vez**, depois de ser usado para enviar um pedido HTTP, deve ser criado outro para fazer um novo pedido.
+- **Cada objeto `XMLHttpRequest` só pode ser usado uma vez**, depois de ser usado para enviar um pedido HTTP, deve ser criado outro para fazer um novo pedido.
 
 #### Mais informação
 
--   https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
--   https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+- https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
+- https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+
+### `fetch`
+
+O `fetch` é uma função global que tem o mesmo proṕosito que o `XMLHttpRequest`: enviar HTTP Requests. A diferença é que:
+
+- É muito mais simples de usar.
+- Usa `Promise` para representar o assincronismo, em vez de eventos (ver slides).
+
+#### Uso
+
+Exemplo: Ler JSON
+
+```js
+fetch("https://ipt-ti2-todo.azurewebsites.net/api/todos/afecarvalho", {
+  // Indicar que estou a fazer um GET (obter dados)
+  method: "GET",
+  headers: {
+    // Indicar que quero JSON usando o cabeçalho HTTP "Accept"
+    Accept: "application/json"
+  }
+})
+  .then(resposta => {
+    // A 'resposta' representa a resposta do servidor. Contém:
+    // .status, indica o HTTP staus code (2XX == OK, 3XX == Redirect, 4XX == Erro do cliente, 5XX == Erro de servidor)
+    // .ok (indicativo se 200 <= .status <= 399)
+    if (resposta.status === 200) {
+      // .json() lê o conteúdo como JSON, e devolve uma Promise
+      // Também existe .text(), entre outros
+      return resposta.json();
+    } else {
+      // Lançar erro
+      return Promise.reject(resposta);
+    }
+  })
+  .then(tarefas => {
+    // Podemos fazer o que for preciso...
+  })
+  .catch(erro => {
+    // Óbvio que se deve mostar uma mensagem a o utilizador ;)
+    console.error("Erro ao obter tarefas", erro);
+  });
+```
+
+#### Mais informação e exemplos
+
+- https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+- https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
