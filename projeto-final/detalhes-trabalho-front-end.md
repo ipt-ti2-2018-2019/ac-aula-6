@@ -21,7 +21,7 @@ Nota esperada: até `10 valores`.
 
 Para o nível "básico", a aplicação deve desempenhar as seguintes tarefas:
 
--   Usar a API pública, disponível em `???`, sem autenticação
+-   Usar a API pública, disponível em https://ipt-ti2-iptgram.azurewebsites.net, sem autenticação
 -   Listar os _posts_ disponíveis na plataforma, numa _view_, incluíndo a seguinte informação:
     -   Fotografia
     -   Utilizador que criou o post
@@ -58,7 +58,7 @@ Nota esperada: até `13 valores`.
 Para o nível "intermédio", a aplicação deve desempenhar as seguintes tarefas:
 
 -   Todas as funcionalidades descritas no nível "básico +"
--   Usar a API privada, disponível em `???`, em vez da API pública, com autenticação mediante _UserName_ e _Password_
+-   Usar a API privada, disponível em https://ipt-ti2-iptgram.azurewebsites.net, em vez da API pública, com autenticação mediante _UserName_ e _Password_
     -   A API privada requer que o utilizador esteja autenticado para poder usar todas as suas funcionalidades
     -   O professor disponibilizará o _UserName_ e _Password_ para cada aluno, por email.
     -   Se for preciso fazer _reset_ à _password_, o aluno deve solicitar uma nova por email, para o professor.
