@@ -10,7 +10,7 @@ Esta parte do trabalho é opcional, se o aluno optar por escolher o tema dado pe
 
 ## Template
 
-Está disponível um _template_ do projeto, com a base de dados já preparada e alguma configuração no `Startup`, no seguinte link: `???`.
+Está disponível um _template_ do projeto, com a base de dados já preparada e alguma configuração no `Startup`, no seguinte link: https://github.com/ipt-ti2-2018-2019/IPTGramApi.
 
 ## Níveis de avaliação
 
